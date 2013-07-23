@@ -14,7 +14,7 @@ class addresscard:
 		fieldholder=addresscardobjects('Mobile Phone Number', userspeccp)
 		self.actualcard.append(fieldholder)
 
-		print 'Address Card created for', self.actualcard[0].fieldvalue
+		#print 'Address Card created for', self.actualcard[0].fieldvalue
 
 	def display(self):
 		print 'Displaying address card for:', self.actualcard[0].fieldvalue
@@ -29,7 +29,9 @@ class addresscard:
 		fieldholder=addresscardobjects(userspecname, userspecvalue)
 		self.actualcard.append(fieldholder)
 
+		print ' '
 		print self.actualcard[-1].fieldname, 'has been created with value:', self.actualcard[-1].fieldvalue
+		print ' '
 
 	def deletefield(self, userspecname):
 		
