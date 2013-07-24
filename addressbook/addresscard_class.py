@@ -17,6 +17,7 @@ class addresscard:
 		#print 'Address Card created for', self.actualcard[0].fieldvalue
 
 	def display(self):
+		print '----------------------------------------------------------------------------'
 		print 'Displaying address card for:', self.actualcard[0].fieldvalue
 		print ' '
 		
@@ -24,6 +25,7 @@ class addresscard:
 			print item.fieldname, ':', item.fieldvalue
 
 		print ' '
+		print '----------------------------------------------------------------------------'
 
 	def createnewfield(self, userspecname='NONE', userspecvalue='NONE'):
 		fieldholder=addresscardobjects(userspecname, userspecvalue)
@@ -40,6 +42,7 @@ class addresscard:
 		if foundindex[0]==True:
 
 			del self.actualcard[foundindex[1]]
+			print
 			print 'Entry successfully removed'
 			print ' '
 
