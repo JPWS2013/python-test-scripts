@@ -150,7 +150,7 @@ class bookbuff:
 						print '2. Create a New Field'
 						print '3. Modify an Address Card Field'
 						print '4. Delete an Existing Address Card Field'
-						print '0. Return to the main menu'
+						print '0. Return to the previous menu'
 						print ' '
 
 						submenu_selection=raw_input('Please enter the number corresponding to the action you would like to perform here: ')

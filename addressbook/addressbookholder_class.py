@@ -48,16 +48,16 @@ class addressbookholder:
 			retreivedaddbook=self.library[retreivedkey]
 			retreivedaddbook.briefallview()
 
-	def deletebook(self, userspecbookname):
-		retreivedkey=self.keysearcher(userspecbookname)
+	def deletebook(self, userspeckey):
+		#retreivedkey=self.keysearcher(userspecbookname)
 
-		if retreivedkey=='bad':
-			print
-			print'Address Book not Found'
-			print
+		# if retreivedkey=='bad':
+		# 	print
+		# 	print'Address Book not Found'
+		# 	print
 
-		else:
-			del self.actualdictionary[retreivedkey]
-			print
-			print 'Addressbook(', retreivedkey, ') has been deleted successfully'
-			print
+		# else:
+		del self.library[userspeckey]
+		print
+		print 'Addressbook(', userspeckey, ') has been deleted successfully'
+		print

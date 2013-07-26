@@ -43,7 +43,7 @@ while mainmenuselect!='9':
 	print '4. Rename Address Book'
 	print '5. Retrieve a specific address book to edit'
 	print '6. Perform a global search on all address books'
-	#print '7. Delete an Address Book'
+	print '7. Delete an Address Book'
 	print '9. Exit the Programme'
 	print 
 
@@ -321,7 +321,8 @@ while mainmenuselect!='9':
 
 					for enumerator in range(len(contactfound)):
 						contactbuffer=myaddressbookholder.library[bookfoundin[enumerator]].actualdictionary[contactfound[enumerator]]
-						print
+						print 
+						print 'From Address Book: ', bookfoundin[enumerator]
 						contactbuffer.display()
 						print
 
@@ -331,12 +332,58 @@ while mainmenuselect!='9':
 					print 'Returning to the main menu....'
 					print
 					time.sleep(0.5)
+	if mainmenuselect=='7':
+		deletebook_1_check=False
+
+		keyscheck=myaddressbookholder.library.keys()
+
+		if len(keyscheck)==0:
+			print 
+			print 'NO ADDRESS BOOKS AVAILABLE FOR DELETION'
+			print 
+			print 'Returning to the main menu...'
+			print
+			time.sleep(0.5)
+
+		else:	
+			while deletebook_1_check !=True:
+
+				print
+				deletebook_1=raw_input('Please enter the name of the address book you would like to delete or enter "go back" to return to the main menu: ')
+
+				if deletebook_1.lower()=='go back':
+					deletebook_1_check=True
+					break
+				else:
+					print
+					deletebook_2=raw_input('Are you sure you wish to delete this address book? (y/n): ')
+
+					if deletebook_2.lower()=='n':
+						continue
+					elif deletebook_2.lower()=='y':
+
+						deletebook_2 = myaddressbookholder.keysearcher(deletebook_1)
+						if deletebook_2 == 'bad':
+							print 
+							print 'Sorry. The address book you requested could not be found. Please try again.'
+							print
+							continue
+						else:
+							break
+
+			if deletebook_1_check==True:
+				print
+				print'Returning to the main menu...'
+				time.sleep(1)
+				print
+		
+			else:
 
 
-
-
-
-
-
+				myaddressbookholder.deletebook(deletebook_2)
+				print
+				print 'Returning to the main menu....'
+				print
+				time.sleep(0.5)
 
 sys.exit('You have chosen to exit the programme. Thank you and have a nice day.')
