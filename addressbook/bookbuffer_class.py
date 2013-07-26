@@ -1,18 +1,17 @@
-class bookbuffer:
-	def __init__(self, retreivedaddressbook):
-		self.addbook={}
+from addresscard_class import *
+from addressbook_class import *
+import sys
+import time
+
+class bookbuff:
+	def __init__(self, userspecbook):
+		self.addbook=userspecbook
 
 	def mainprogramme(self):
-
-		from addresscard_class import *
-		from addressbook_class import *
-		import sys
-		import time
 
 		myaddressbook=self.addbook
 
 		submainmenuselect='0' #Variable that stores the main menu selection from the user
-
 
 		while submainmenuselect!='9': #Ensures the loop is continually run unless user selects 9 (exit option)
 

@@ -42,7 +42,7 @@ while mainmenuselect!='9':
 	print '3. View 1 specific Address Book'
 	print '4. Rename Address Book'
 	print '5. Retrieve a specific address book to edit'
-	#print '6. Perform a global search on all address books'
+	print '6. Perform a global search on all address books'
 	#print '7. Delete an Address Book'
 	print '9. Exit the Programme'
 	print 
@@ -258,12 +258,7 @@ while mainmenuselect!='9':
 				print
 				bufferforbook=myaddressbookholder.library[addressbookretreive_2]
 
-				bufferforediting=bookbuffer()
-
-				print bufferforediting.__class__.__name__
-				print bufferforbook.__class__.__name__
-
-				bufferforediting.addbook=bufferforbook
+				bufferforediting=bookbuff(bufferforbook)
 
 				buffer_postediting=bufferforediting.mainprogramme()
 
@@ -272,7 +267,74 @@ while mainmenuselect!='9':
 				
 				time.sleep(1)
 
+	if mainmenuselect=='6':
+
+		keyschecker=myaddressbookholder.library.keys()
+
+		if len(keyschecker)==0:
+			print 
+			print 'NO ADDRESS BOOKS TO SEARCH'
+			print 
+			print 'Returning to the main menu...'
+			print
+			time.sleep(0.5)
+
+		else: 
+			contactfound=[]
+			bookfoundin=[]
+			globalsearch_1_check=False
+			print
+			globalsearch_1=raw_input('Please enter the contact you would like to search for or enter "go back" to return to the main menu: ')
+
+			if globalsearch_1.lower()=='go back':
+				globalsearch_1_check=True
+
+			if globalsearch_1_check==True:
+				print
+				print'Returning to the main menu...'
+				time.sleep(1)
+				print
+		
+			else:
+
+				alladdressbookkey=myaddressbookholder.library.keys()
+
+				for eachKey in alladdressbookkey:
+					eachBook=myaddressbookholder.library[eachKey]
+					globalsearchresult=eachBook.keysearcher(globalsearch_1)
 				
+					if globalsearchresult != 'bad':
+						contactfound.append(globalsearchresult)
+						bookfoundin.append(eachBook.bookname)
+
+				if len(contactfound)==0:
+					print 
+					print 'Sorry. Your specified contact was not found in any of your existing addressbooks.'
+					print
+					print 'Returning to the main menu....'
+					print
+					time.sleep(0.5)
+
+				else:
+					print 
+					print 'There were ', len(contactfound), 'contact(s) found that match the name you specified. They are shown below:'
+
+					for enumerator in range(len(contactfound)):
+						contactbuffer=myaddressbookholder.library[bookfoundin[enumerator]].actualdictionary[contactfound[enumerator]]
+						print
+						contactbuffer.display()
+						print
+
+					print
+					waitingholder=raw_input('Once done, hit the enter key to return to the main menu.')
+					print
+					print 'Returning to the main menu....'
+					print
+					time.sleep(0.5)
+
+
+
+
 
 
 
