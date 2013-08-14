@@ -1,4 +1,5 @@
 from addressbook_class import *
+import time
 
 class addressbookholder:
 	'This class stores a collection of address books'
@@ -13,8 +14,12 @@ class addressbookholder:
 
 		keybuffer=self.library.keys()
 		keybuffer.sort()
-		for eachKey in keybuffer:
-			print eachKey
+		bookenumerator=1
+		for eachKey in keybuffer: #Iterate through each  key in the list
+			print bookenumerator,'. ', eachKey #Print the item number, followed by the key itself
+			bookenumerator += 1 #Increment the counter to the next number
+		#for eachKey in keybuffer:
+			#print eachKey
 
 	def keysearcher(self, userspeckey):
 		allkeys=self.library.keys()
@@ -127,13 +132,24 @@ class addressbookholder:
 
 		except IOError, e:
 			print
-			print 'Sorry. File not Found:', e
+			print 'We were unable to find the required files. Creating  new address book library now...'
 			print
+			time.sleep(1)
+			return False
 
 		numberoffiles=instructfilesearch.readline()
 		numberoffiles=int(numberoffiles)
 		
 		instructfilesearch.close()
+
+		if numberoffiles==0:
+			print
+			print 'No prior addressbooks found. Creating a new library now..'
+			print
+
+			time.sleep(1)
+
+			return False
 
 		for i in range(numberoffiles):
 			try:
@@ -143,6 +159,7 @@ class addressbookholder:
 				print 
 				print 'Sorry. Unable to retrieve addressbook:', e
 				print
+				return False
 
 			lines=bookfilesearch.readlines()
 			numberofcontacts=0
@@ -230,3 +247,4 @@ class addressbookholder:
 					continue
 			#addressbookbuffer.fullallview()			
 			self.createbook(addressbookbuffer)
+			return True
