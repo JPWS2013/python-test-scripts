@@ -1,0 +1,5 @@
+README FOR 'addbookworkfiles'
+
+This file is meant for the programme to use to store addressbook data when the user closes the programme.
+
+Nothing else should be stored in this folder. 
