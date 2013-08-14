@@ -222,6 +222,6 @@ class bookbuff:
 				time.sleep(0.5)
 
 		print
-		print 'Returning to the Main Menu....'
+		print 'Returning to the Previous Menu....'
 		print
 		return myaddressbook

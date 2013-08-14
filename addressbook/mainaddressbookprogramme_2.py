@@ -4,8 +4,11 @@ from bookbuffer_class import *
 import sys
 import time
 from endprogops import *
+import os
 
 myaddressbookholder=addressbookholder()
+
+myaddressbookholder.openprogops()
 
 print ' '
 print ' '
@@ -33,8 +36,9 @@ print ' '
 
 time.sleep(2)
 mainmenuselect='0'
+packingfunction=False
 
-while mainmenuselect!='9':
+while packingfunction==False:
 
 	print 'A list of available actions is shown below:'
 	print 
@@ -387,21 +391,34 @@ while mainmenuselect!='9':
 				print
 				time.sleep(0.5)
 
-	if mainmenuselect=='9'
-	print 
-	print 'You have chosen to exit the system. Please wait while packing opertions are performed...'
-	print 
-
-	packingfunction=myaddressbookholder.endprogops()
-
-	if packingfunction=True:
+	if mainmenuselect=='9':
 		print 
-		print'Operations completed successfully'
-		break
+		print 'You have chosen to exit the system. Please wait while packing opertions are performed...'
+		print 
+
+		directory='addbookworkfiles'
+		filelist=os.listdir(directory)
+
+		for bookFile in filelist:
+			os.remove(directory + "/" + bookFile)
+	
+		packingfunction=myaddressbookholder.endprogops()
+
+		time.sleep(1)
+
+		if packingfunction==True:
+			print 
+			print'Operations completed successfully'
+			break
+		else:
+			print 
+			print 'Operation failed. Please try again'
+			print
+
 	else:
-		print 
-		print 'Operation failed. Please try again'
 		print
+		print 'You have entered an invalid choice. Please try again.'
+		print 
 
 
 sys.exit('You have chosen to exit the programme. Thank you and have a nice day.')

@@ -31,9 +31,9 @@ class addresscard:
 		fieldholder=addresscardobjects(userspecname, userspecvalue) #Creates a new addresscardobjects object
 		self.actualcard.append(fieldholder) #Adds the field to the address card
 
-		print ' '
-		print self.actualcard[-1].fieldname, 'has been created with value:', self.actualcard[-1].fieldvalue #Confirmation of addition of field displayed to user
-		print ' '
+		# print ' '
+		# print self.actualcard[-1].fieldname, 'has been created with value:', self.actualcard[-1].fieldvalue #Confirmation of addition of field displayed to user
+		# print ' '
 
 	def deletefield(self, userspecname): #Instance method for deleting a field
 		
