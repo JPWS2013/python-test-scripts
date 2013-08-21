@@ -127,44 +127,48 @@ class addressbookholder:
 
 			return [stringtosearch[(startpoint+1):stringlength], stringlength, testresult]
 
-		try:
-			instructfilesearch=open('addbookworkfiles/instruct_file', "r")
+		try: #Exception handling code in case instruct_file doesn't exist
+			instructfilesearch=open('addbookworkfiles/instruct_file', "r") #Try to open the instruct_file
 
-		except IOError, e:
+		except IOError, e: #If you can't open it, indicate so
 			print
 			print 'We were unable to find the required files. Creating  new address book library now...'
 			print
 			time.sleep(1)
 			return False
 
-		numberoffiles=instructfilesearch.readline()
-		numberoffiles=int(numberoffiles)
+		numberoffiles=instructfilesearch.readline() #read the indicated number of files
+		numberoffiles=int(numberoffiles) #Convert the number of files to an integer number
 		
-		instructfilesearch.close()
 
-		if numberoffiles==0:
+
+		instructfilesearch.close() #Close the file
+
+		if numberoffiles==0: #If the number is zero, 
 			print
-			print 'No prior addressbooks found. Creating a new library now..'
+			print 'No prior addressbooks found. Creating a new library now..' #indicate this to user
 			print
 
-			time.sleep(1)
+			time.sleep(1) #wait 1 second
 
 			return False
 
-		for i in range(numberoffiles):
-			try:
-				filename='addbookworkfiles/addressbook'+str(i+1)
-				bookfilesearch=open(filename, "r")
+
+		for i in range(numberoffiles): #for each file indicated
+
+			try: #exception handling code in case addressbook can't be found
+				filename='addbookworkfiles/addressbook'+str(i+1) #open the addressbook file
+				bookfilesearch=open(filename, "r") #Open the addressbook file
 			except IOError, e:
 				print 
 				print 'Sorry. Unable to retrieve addressbook:', e
 				print
 				return False
 
-			lines=bookfilesearch.readlines()
-			numberofcontacts=0
-			for line in lines:
-				numberofcontacts+=1
+			lines=bookfilesearch.readlines() #Read all lines in the addressbook
+			numberofcontacts=0 #iniitalize the number of contacts to zero
+			for line in lines: #for each line in the file
+				numberofcontacts+=1 #increment the numberofcontacts to count how many contcts there are
 
 			#numberofcontacts=linecounter-1
 			#print 'numberofcontacts=', numberofcontacts
@@ -175,6 +179,8 @@ class addressbookholder:
 				if characterholder==';':
 					#stoppingpoint=stringlength
 					break
+
+
 
 			bookname_clean=bookname_rawstring[0:stringindex]
 			#booknamesearcher=stringretreiver(lines[0], ';')
@@ -198,7 +204,6 @@ class addressbookholder:
 				point=retreiveroutput[1]
 				#print 'namefieldvalue=', namefieldvalue
 				#print retreiveroutput[2]
-
 
 				retreiveroutput= stringretreiver(contactline, ':', point)
 				cpfieldname=retreiveroutput[0]
@@ -247,4 +252,58 @@ class addressbookholder:
 					continue
 			#addressbookbuffer.fullallview()			
 			self.createbook(addressbookbuffer)
-			return True
+		return True
+
+
+	def globalsearch(self, userspeckey):
+		#searchedstring_counter=0
+		#serchstring_counter=0
+		foundkeys=[]
+		allbooks=self.library.keys()
+
+		for eachBook in allbooks:
+			retrievedbook=self.library[eachBook]
+
+			allkeys=retrievedbook.actualdictionary.keys()
+
+			for eachKey in allkeys:
+				print eachKey
+				searchedstring_counter=0
+				char_test2=False
+
+				while char_test2==False:
+
+					searchstring_counter=0
+
+					#print 'searchedstring_counter==(len(userspeckey))=', searchedstring_counter==(len(userspeckey))
+					#print 'char_test2==False = ', char_test2==False
+					if (searchedstring_counter==(len(eachKey))) and (char_test2==False):
+						break
+					
+					#print 'eachKey[searchedstring_counter]=', eachKey[searchedstring_counter]
+					#print 'userspeckey[searchstring_counter]=', userspeckey[searchstring_counter]
+
+					char_test1=eachKey[searchedstring_counter].lower()==userspeckey[searchstring_counter].lower()
+
+					#print 'char_test1=', char_test1
+
+					if char_test1==True:
+						endindex=searchedstring_counter+len(userspeckey)
+						testkey=eachKey[searchedstring_counter : endindex]
+
+						#print 'testkey.lower()=', testkey.lower()
+						#print 'length=',  len(testkey.lower())
+						#print 'userspeckey.lower()=', userspeckey.lower()
+						#print 'length=', len(userspeckey.lower())
+
+						char_test2=(testkey.lower()==userspeckey.lower())
+						#print 'char_test2=', char_test2
+						#print 'char_test2==True =', char_test2==True 
+
+						if char_test2==True:
+							foundkeys.append([eachKey, eachBook])
+							break
+
+					searchedstring_counter+=1
+
+		return foundkeys	

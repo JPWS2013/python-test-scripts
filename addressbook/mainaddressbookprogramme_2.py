@@ -335,15 +335,17 @@ while packingfunction==False: #Loops through the options menu until a valid sele
 		
 			else: #If variable not true, then user did not enter go back
 
-				alladdressbookkey=myaddressbookholder.library.keys() #Retreives all the keys
+				# alladdressbookkey=myaddressbookholder.library.keys() #Retreives all the keys
 
-				for eachKey in alladdressbookkey: #for each key
-					eachBook=myaddressbookholder.library[eachKey] #Retreives each addressbook
-					globalsearchresult=eachBook.keysearcher(globalsearch_1) #Searches for a contact in the address book
+				# for eachKey in alladdressbookkey: #for each key
+				# 	eachBook=myaddressbookholder.library[eachKey] #Retreives each addressbook
+				# 	globalsearchresult=eachBook.keysearcher(globalsearch_1) #Searches for a contact in the address book
 				
-					if globalsearchresult != 'bad': #If the result is not 'bad', means something was found
-						contactfound.append(globalsearchresult) #contact name stored
-						bookfoundin.append(eachBook.bookname) #Book it was found in stored
+				# 	if globalsearchresult != 'bad': #If the result is not 'bad', means something was found
+				# 		contactfound.append(globalsearchresult) #contact name stored
+				# 		bookfoundin.append(eachBook.bookname) #Book it was found in stored
+				
+				contactfound=myaddressbookholder.globalsearch(globalsearch_1)
 
 				if len(contactfound)==0: #If the length of contactfound is zero, nothing found
 					print 
@@ -357,12 +359,12 @@ while packingfunction==False: #Loops through the options menu until a valid sele
 					print 
 					print 'There were ', len(contactfound), 'contact(s) found that match the name you specified. They are shown below:'
 
-					for enumerator in range(len(contactfound)):
-						contactbuffer=myaddressbookholder.library[bookfoundin[enumerator]].actualdictionary[contactfound[enumerator]] #Retreives the address card from the address book
-						print 
-						print 'From Address Book: ', bookfoundin[enumerator]
+					for eachContact in contactfound:
+						contactbuffer=myaddressbookholder.library[eachContact[1]].actualdictionary[eachContact[0]] #Retreives the address card from the address book
+						#print 
+						#print 'From Address Book: ', bookfoundin[enumerator]
 						contactbuffer.display()
-						print
+						#print
 
 					print
 					waitingholder=raw_input('Once done, hit the enter key to return to the main menu.')
@@ -370,6 +372,7 @@ while packingfunction==False: #Loops through the options menu until a valid sele
 					print 'Returning to the main menu....'
 					print
 					time.sleep(0.5)
+	
 	if mainmenuselect=='7':
 		deletebook_1_check=False
 

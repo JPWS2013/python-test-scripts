@@ -112,6 +112,4 @@ class addressbook:
 				tempholder=self.actualdictionary[eachkey]
 				tempholder.display() #Uses the display instance method defined for address cards to display the full address card
 			print 
-		print '-----------------------------------------------------------------------------'
-
-	
+		print '-----------------------------------------------------------------------------'	
